@@ -149,28 +149,29 @@ Appearance
 
 Recommended programs
 ====================
-sudo apt-get install xfce4-whiskermenu-plugin intel-microcode vim g++ git xpdf keepass2
 
-xfce4-whiskermenu-plugin	like Windows start menu
+apt-get install xfce4-whiskermenu-plugin xpdf keepass2 
+apt-get install vim g++ default-jdk git
 
-intel-microcode
+Applications
+	xfce4-whiskermenu-plugin	like Windows start menu
+	plank				dock
+					Open Window Manger Tweaks. 
+					Under Composition tab, uncheck 
+						"Show shadows under dock windows"
+					This will get rid of the weird line
+	torbrowser-launcher		requires debian-backports
+	xpdf				for pdf viewer
+	keepass2			password manager
 
-vim
+Programming
+	vim				text editor
+	g++				C++ compiler
+	default-jdk			Java Development Kit
+	git				version managment
 
-g++				C++ compiler
-
-git				version managment
-
-xpdf				for pdf viewer
-
-keepass2			password manager
-
-plank				dock
-				Open Window Manger Tweaks. 
-				Under Composition tab, uncheck "Show shadows under dock windows"
-				this will get rid of the weird line
-
-torbrwoser-aluncher		requires debian-backports
+Other
+	intel-microcode
 
 Unresolved Problems
 ===================
