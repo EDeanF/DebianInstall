@@ -33,7 +33,7 @@ Add 32bit architecture
 
 Add headers
 	apt-get install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')
-	It is a good excersise to entire "uname -r" into the terminal
+	It is a good excercise to enter "uname -r" into the terminal
 	Read the documentation for sed. You should have a better idea what this code is doing
 
 Default install includes network manager, but need to install driver for wireless card
@@ -117,6 +117,8 @@ After installing bbswitch, suspend and hibernate no longer work
 	I have set my computer to always hibernate instead using xfce-power-manager. 
 		It takes more time to wake up, but it is okay for now.
 	
+	Update 2018/08/05: There are still issues with hibernate, but it doesn't occur every time. syslog shows error after systemd-sleep runs
+
 Personalize
 ===========
 These are mostly cosmetic customizations
