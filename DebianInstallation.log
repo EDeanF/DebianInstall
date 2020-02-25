@@ -1,33 +1,53 @@
 Initial Starting Point
 ======================
-	the following resources are a great starting point for installing Debian Stretch
-	for the first time
+	the following resources are a great starting point
+	for installing Debian for the first time
 	
 	Average Linux User
-		https://www.youtube.com/watch?v=bB-gmnvYDao
-	Don't Call Me Lenny!	
-		https://www.youtube.com/watch?v=eUnfVG7Zst0
-		https://www.youtube.com/watch?v=_5RJzZxQ62U
+		https://averagelinuxuser.com/
 	The ArchLinux wiki appears much better managed than the Debian wiki
 		https://wiki.archlinux.org
+	Don't Call Me Lenny!
+		https://www.youtube.com/channel/UCRuUzEZux8Y6yISPeGDIHdg
 
 About Computer
 ==============
 Laptop:		Gigabyte Aero 15
-Distro:		Debian Stretch 
-Desktop:	xfce
+Distro:		Debian 10 Buster 
+Desktop:	xfce4
 
 Installation
 ============
+Mostly follow Average Linux User's guide to installation
+
 Deactivate SecureBoot
 	Go into the BIOS menu (reboot and spam F2)
 	Go to the Security Tab and Deactivate SecureBoot
 
-Follow Average Linux User's guide to installation
+Partition
+	30GB root
+	16GB swap
+	the rest is for home
 
-Add contrib and non-free repositories
-Add stretch-backports for more updated software
-	
+	You will need to do this manually to keep home
+	Just double click each partition
+		Use as: Ext4 journaling file system
+		Mount point: / or home
+	For swap
+		Use as: swap area
+
+Installing base
+	Installing xfce4 using the installation GUI breaks on Aero 15
+	I just install the base (standard system utilities only) and then install dekstop later
+	I was unable to get bbswitch to work with testing, so I will stick with buster
+
+Add Repositories
+	Add contrib and non-free repositories
+	Add stretch-backports for more updated software
+	apt-get update
+	apt-get upgrade
+	apt-get dist-upgrade
+
 Add 32bit architecture
 	dpkg --add-architecture i386
 
@@ -36,33 +56,48 @@ Add headers
 	It is a good excercise to enter "uname -r" into the terminal
 	Read the documentation for sed. You should have a better idea what this code is doing
 
-Default install includes network manager, but need to install driver for wireless card
-	https://wiki.debian.org/iwlwifi
-	sudo apt-get install firmware-iwlwifi
+Firmware
+	apt-get install firmware-linux intel-microcode
 
-Install firewall
-	sudo apt-get install ufw
-	sudo ufw enable
-	sudo ufw status verbose
+Internet
+	apt-get install network-manager network-manager-gnome firmware-iwlwifi
+	apt-get install firefox-esr
 
-Improve Touchpad 
-	sudo mk /etc/X11/xorg.conf.d/30-touchpad.conf
+	Sources:
+		https://wiki.debian.org/iwlwifi
 	
-	sources:
-		https://wiki.archlinux.org/index.php/Libinput
-		https://jlk.fjfi.cvut.cz/arch/manpages/man/libinput.4
+	Setup Firewall	
+		sudo apt-get install ufw
+		sudo ufw enable
+		sudo ufw status verbose
 
-edit grub to save last booted drive
+Desktop
+	sudo apt-get install xfce4 xfce4-goodies
+
+Edit Grub File
 	useful if you are dual booting
 
 	/etc/default/grub
 	GRUB_DEFAULT=saved
 	GRUB_SAVEDEFAULT=true
 	update-grub2
-	see https://wiki.debian.org/Grub
+	
+	Sources:	
+		https://wiki.debian.org/Grub
 
-Add PulseAudioPlugin to Panel1
-	Allows you to use Fn keys for volume control
+Improve Touchpad
+	sudo mk /etc/X11/xorg.conf.d/30-touchpad.conf
+	
+	Sources:
+		https://wiki.archlinux.org/index.php/Libinput
+		https://jlk.fjfi.cvut.cz/arch/manpages/man/libinput.4
+
+Disabling Nouveau Drivers
+	There are problems running nouveau drivers. For example, running lspci causes crash
+	To blacklist the nouveau drivers
+	sudo mk /etc/modprobe.d/nouveau_blacklist.conf
+	Use your favorite text-editor to write: blacklist nouveau
+	Look up "Nouveau Drivers" in the ArchWiki for more info
 
 Power Management / Discrete Graphics
 ====================================
@@ -72,9 +107,9 @@ As such, this section is very much a work in progress
 
 A naked install of Debian with xfce desktop results in a battery life of around 4 hours.
 
-You can double the battery life by installing bbswitch and disabling the nouveau drivers
-
-Or you can make your life a lot easier by installing bumblebee, which will do both of these tasks
+You can double the battery life by installing bbswitch to shut off the graphics card
+You will need to confirm bbswitch in order to have it automatically run upon booting up
+Or you can make your life easier by installing bumblebee, which will also disable nouveau
 	sudo apt-get install bumblebee
 
 Installing bbswitch
@@ -87,37 +122,17 @@ Installing bbswitch
 	You need to do ALL the tasks listed in "Disable card on boot" in the README file
 	You can find the README file for bbswitch in the bumblebee github
 
-Disabling Nouveau Drivers
-	After a fresh install of Debian stretch, it seems that this is not necessary
-	I could also use bbswitch to turn the graphics card on and off after a fresh install
-
-	However, after some point, the Nouveau driver stopped working
-	I have not tested this yet, but it may have something to do with booting into Windows.
-	The Nouveau Drivers seemed to work fine until after I booted into Windows and then back into Linux
-	After booting into Windows, the Nouveau drivers stopped working, and bbswitch could no longer 
-		change the state of the graphics card
-
-	To blacklist the nouveau drivers
-	sudo mk /etc/modprobe.d/nouveau_blacklist.conf
-	use your favorite text-editor to write: blacklist nouveau
-	You can look up "Nouveau Drivers" in the ArchWiki for more info
-
 After installing bbswitch, suspend and hibernate no longer work
-	I'm not exactly sure why this is the case. 
+	I'm not sure why this is the case. 
 	In the meantime, you can get around the problem by unloading the bbswitch module before suspending or hibernating
 	You can automatically unload/load bbswitch before/after suspending or hibernating by making a file in the directory
 		/lib/systemd/system-sleep/
 	Don't forget to make the file executable by going into root and using chmod +x filename
 	For more information read: man systemd-suspend.service
-
-	For whatever reason, suspend still does not work.
-	More specifically, the screen freezes if you try to automatically load the bbswitch module after suspending.
-	If you unload the bbswitch before suspending, and don't automatically load bbswitch after suspending, 
-		it works fine, aside from the fact that you have the manually load bbswitch to improve battery life
-	I have set my computer to always hibernate instead using xfce-power-manager. 
-		It takes more time to wake up, but it is okay for now.
 	
-	Update 2018/08/05: There are still issues with hibernate, but it doesn't occur every time. syslog shows error after systemd-sleep runs
+	After hibernating, you may be presented with a blank screen. 
+	Most of the time, if you switch to TTY7 (Ctrl+Alt+F7) and then TTY8, you will get the login screen
+	But sometimes it still doesn't work
 
 Personalize
 ===========
@@ -131,15 +146,15 @@ Keyboard Shortcuts
 	firefox				Ctrl+Alt+F
 
 Window Manager
-	Style: Button Layout: remove shade and maximize
-	Advanced:Windows snapping: To other windows
-	Advanced:Wrap workspaces when reaching the screen edge
+	Style: 		Button Layout: remove shade and maximize
+	Advanced:	Windows snapping: To other windows
+	Advanced:	Wrap workspaces when reaching the screen edge
 
 Panel
 	Remove Panel 2
 	Customize Panel 1
 		Display tab
-			Measurements: Row Size 50
+			Measurements: Row Size 40
 		Items tab
 			Window Buttons: hide button labels, always group windows
 			Workspace Switcher: number of rows=2
@@ -147,41 +162,26 @@ Panel
 			Notification Area: Maximum Icon Size 50
 
 Appearance
-	Xfce-dusk
+	Adwaita-dark
 
-Recommended programs
+Programs
 ====================
+Debian-Repositories
 
-apt-get install xfce4-whiskermenu-plugin xpdf keepass2 
-apt-get install vim g++ default-jdk git
+media		apt-get install libreoffice vlc inkscape xpdf
+system		apt-get install keepass2 
+programming	apt-get install vim g++ default-jdk python3 git
 
-Applications
-	xfce4-whiskermenu-plugin	like Windows start menu
-	plank				dock
+Instructions
+	plank				docker
 					Open Window Manger Tweaks. 
 					Under Composition tab, uncheck 
 						"Show shadows under dock windows"
 					This will get rid of the weird line
 	torbrowser-launcher		requires debian-backports
-	xpdf				for pdf viewer
-	keepass2			password manager
-
-Programming
-	vim				text editor
-	g++				C++ compiler
-	default-jdk			Java Development Kit
-	git				version managment
-
-Other
-	intel-microcode
 
 Unresolved Problems
 ===================
 
 Have not tried to use graphics card
 Most Fn buttons not detected
-
-Backup
-======
-
-firefox		places.sqlite, prefs.js
