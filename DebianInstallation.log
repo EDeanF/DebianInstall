@@ -169,7 +169,8 @@ Programs
 Debian-Repositories
 
 media		apt-get install libreoffice vlc inkscape xpdf
-system		apt-get install keepass2 
+system		apt-get install keepass2 fonts-arphic-ukai fonts-arphic-uming
+
 programming	apt-get install vim g++ default-jdk python3 git
 
 Instructions
