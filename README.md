@@ -1,10 +1,9 @@
 # DebianInstall
 
-Notes for installing Debian onto Gigabyte Aero 15
+Notes for installing Debian 10 onto Gigabyte Aero 15
 
-Instructions are written in DebianInstallation.log
+Explanation written in DebianInstallation.log
 
-The configuration files should be copied in the following directories
-30-touchpad.conf		/usr/share/X11/xorg.conf.d/
-nouveau_blacklist.conf		/etc/modprobe.d/
-bbswitch.sh			/lib/systemd/system-sleep/
+run backup.sh to save necessary files into ./config
+run install.sh to update repos and install xfce desktop
+run configure.sh to copy files in ./config to proper directories

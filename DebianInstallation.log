@@ -63,6 +63,8 @@ Internet
 	apt-get install network-manager network-manager-gnome firmware-iwlwifi
 	apt-get install firefox-esr
 
+	update /etc/NetworkManager/NetworkManager.conf
+
 	Sources:
 		https://wiki.debian.org/iwlwifi
 	
