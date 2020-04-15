@@ -124,17 +124,20 @@ Installing bbswitch
 	You need to do ALL the tasks listed in "Disable card on boot" in the README file
 	You can find the README file for bbswitch in the bumblebee github
 
-After installing bbswitch, suspend and hibernate no longer work
-	I'm not sure why this is the case. 
-	In the meantime, you can get around the problem by unloading the bbswitch module before suspending or hibernating
-	You can automatically unload/load bbswitch before/after suspending or hibernating by making a file in the directory
-		/lib/systemd/system-sleep/
-	Don't forget to make the file executable by going into root and using chmod +x filename
-	For more information read: man systemd-suspend.service
-	
-	After hibernating, you may be presented with a blank screen. 
-	Most of the time, if you switch to TTY7 (Ctrl+Alt+F7) and then TTY8, you will get the login screen
-	But sometimes it still doesn't work
+Fixing light-locker
+	If you are presented with a black screen after sleeping, suspending, or hibernating,
+	try tty7 (i.e. Ctrl+Alt+F7). If you get a message that the screen is locked
+	try waiting. If it doesn't go to the login screen, tty8 (i.e. Ctrl+Alt+F8)
+
+	It turns out that this is a very well documented problem in light-locker
+	also https://github.com/the-cavalry/light-locker/issues/138
+	editing /usr/bin/xflock4 seems to work
+
+Suspend
+	Suspend has some weird behavior where it will work once, but not twice
+Closing Lid
+	Closing the lid results in the same error as before, i.e. having to tty7 and then tty8
+	If you hibernate manually there is no problem
 
 Personalize
 ===========
@@ -165,6 +168,9 @@ Panel
 
 Appearance
 	Adwaita-dark
+
+Power Manager
+	General -> Appearance -> System tray icon
 
 Programs
 ====================

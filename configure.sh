@@ -18,7 +18,7 @@ update-grub2
 cp ./config/30-touchpad.conf /usr/share/X11/xorg.conf.d/30-touchpad.conf
 
 # Manage Graphics
-apt-get install bbswitch
+apt-get install bbswitch-dkms
 cp ./config/nouveau_blacklist.conf /etc/modprobe.d/nouveau_blacklist.conf
 cp ./config/modules /etc/modules
 cp ./config/bbswitch.conf.kmod /etc/modprobe.d/bbswitch.conf
@@ -26,3 +26,5 @@ cp ./config/bbswitch.conf.systemd /etc/modules-load.d/bbswitch.conf
 cp ./config/bbswitch.sh /lib/systemd/system-sleep/
 update-initramfs -u
 
+# Power Managment
+cp ./config/xflock4 /usr/bin/
