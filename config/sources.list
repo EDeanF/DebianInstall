@@ -1,18 +1,14 @@
 # 
 
-# deb cdrom:[Debian GNU/Linux 10.3.0 _Buster_ - Official amd64 NETINST 20200208-12:07]/ buster main
+# deb cdrom:[Debian GNU/Linux bullseye-DI-alpha2 _Bullseye_ - Official Snapshot amd64 NETINST 20200315-11:07]/ bullseye main
 
-#deb cdrom:[Debian GNU/Linux 10.3.0 _Buster_ - Official amd64 NETINST 20200208-12:07]/ buster main
+#deb cdrom:[Debian GNU/Linux bullseye-DI-alpha2 _Bullseye_ - Official Snapshot amd64 NETINST 20200315-11:07]/ bullseye main
 
-deb http://deb.debian.org/debian/ buster main contrib non-free
-deb-src http://deb.debian.org/debian/ buster main contrib non-free
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb-src http://deb.debian.org/debian/ bullseye main contrib non-free
 
-deb http://security.debian.org/debian-security buster/updates main contrib non-free
-deb-src http://security.debian.org/debian-security buster/updates main contrib non-free
-
-# buster-updates, previously known as 'volatile'
-deb http://deb.debian.org/debian/ buster-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+deb http://security.debian.org/debian-security bullseye-security main contrib non-free
+deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free
 
 # This system was installed using small removable media
 # (e.g. netinst, live or single CD). The matching "deb cdrom"

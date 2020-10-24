@@ -9,4 +9,4 @@ cp /etc/modules ./config/modules
 cp /etc/modprobe.d/bbswitch.conf ./config/bbswitch.conf.kmod
 cp /etc/modules-load.d/bbswitch.conf ./config/bbswitch.conf.systemd
 cp /lib/systemd/system-sleep/bbswitch.sh ./config/bbswitch.sh
-
+cp /usr/bin/xflock4 ./config/xflock4

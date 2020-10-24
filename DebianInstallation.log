@@ -117,27 +117,26 @@ Or you can make your life easier by installing bumblebee, which will also disabl
 Installing bbswitch
 	sudo apt-get install bbswitch-dkms
 
-	You then need to load the module
-	sudo modprobe bbswitch load_state=0
+	To have bbswitch run automatically on boot, you need to create two files
+	One for kmod and one for systemd:
+	(1) /etc/modprobe.d/bbswitch.conf
+	(2) /etc/modules-load.d/bbswitch.conf
+	see https://github.com/Bumblebee-Project/bbswitch for details
+	Editing /etc/modules causes an error for systemd
 
-	If you like, you can also configure bbswitch to disable the card upon boot
-	You need to do ALL the tasks listed in "Disable card on boot" in the README file
-	You can find the README file for bbswitch in the bumblebee github
-
-Fixing light-locker
-	If you are presented with a black screen after sleeping, suspending, or hibernating,
-	try tty7 (i.e. Ctrl+Alt+F7). If you get a message that the screen is locked
-	try waiting. If it doesn't go to the login screen, tty8 (i.e. Ctrl+Alt+F8)
+Problem with light-locker
+	If you are presented with a black screen after screensaver, suspending, or hibernating
+	To get to the login screen TTY7 (i.e. Ctrl+Alt+F7) and then TTY8 (Ctrl+Alt+F8)
 
 	It turns out that this is a very well documented problem in light-locker
-	also https://github.com/the-cavalry/light-locker/issues/138
-	editing /usr/bin/xflock4 seems to work
+	see https://github.com/the-cavalry/light-locker/issues/138
+	editing /usr/bin/xflock4 only seems to help when hibernating from xfce logout GUI
 
 Suspend
-	Suspend has some weird behavior where it will work once, but not twice
-Closing Lid
-	Closing the lid results in the same error as before, i.e. having to tty7 and then tty8
-	If you hibernate manually there is no problem
+	Suspend has some very weird behavior.
+	I can suspend once using either xfce GUI or systemctrl, 
+	but the second time freezes everything. Cannot even TTY
+	https://github.com/systemd/systemd/issues/11810#issuecomment-489727505
 
 Personalize
 ===========
