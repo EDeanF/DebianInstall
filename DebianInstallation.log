@@ -13,7 +13,7 @@ Initial Starting Point
 About Computer
 ==============
 Laptop:		Gigabyte Aero 15
-Distro:		Debian 10 Buster 
+Distro:		Debian 9 Stretch
 Desktop:	xfce4
 
 Installation
@@ -37,9 +37,10 @@ Partition
 		Use as: swap area
 
 Installing base
+	fresh install of Debian 10 does not work
+	will just install Debian 9 for now
 	Installing xfce4 using the installation GUI breaks on Aero 15
 	I just install the base (standard system utilities only) and then install dekstop later
-	I was unable to get bbswitch to work with testing, so I will stick with buster
 
 Add Repositories
 	Add contrib and non-free repositories
