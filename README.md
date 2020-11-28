@@ -15,9 +15,9 @@ The following resources are a great starting point for installing Debian for the
 
 # About Computer
 
-Laptop: Gigabyte Aero 15 (2017)
-Distro: Debian 9 Stretch
-Desktop: xfce4
+- **Laptop:** Gigabyte Aero 15 (2017)
+- **Distro:** Debian 9 Stretch
+- **Desktop:** xfce4
 
 # Installation
 
@@ -35,9 +35,10 @@ Mostly follow Average Linux User's guide to installation
 - the rest is for home
 
 This makes it easy to reinstall Linux. You can easily figure out what is root and what is home, since home has all the space. The main drawback is that you may run out of space to install programs in the root file system and will have to install in home, but this seems to be fairly common practice anyway. To reformat:
-- Double click each partition
-- Use as: Ext4 journaling file system
-- Mount point: / or home
+
+- double click each partition
+- **Use as:** Ext4 journaling file system
+- **Mount point:** / or home
 
 ### Installing base
 
@@ -46,11 +47,20 @@ This makes it easy to reinstall Linux. You can easily figure out what is root an
 
 # Install
 
-Run install.sh as sudo.
+`sudo ./install.sh`
+
+- includes contrib and non-free to `/etc/apt/sources.list`
+- update and upgrades existing software
+- adds 32-bit architecture
+- install linux headers
+- install firmware drivers and intel microcode firmware
+- install xfce4 desktop
 
 # Configure
 
-Run configure.sh as sudo. Configures xfce, network manager, firewall, grub2, and, mousepad.
+`sudo ./configure.sh`
+
+Configures xfce, network manager, firewall, grub2, and mousepad.
 
 ### Sources:
 
@@ -60,7 +70,7 @@ Run configure.sh as sudo. Configures xfce, network manager, firewall, grub2, and
 
 # Discrete Graphics and Power Management
 
-run nvidia.sh
+`sudo ./nvidia.sh`
 
 ### Disabling Nouveau Drivers
 
@@ -68,31 +78,36 @@ There are problems running nouveau drivers. For example, running lspci causes cr
 
 ### Disabling Nvidea Card
 
-A naked install of Debian with xfce desktop results in a battery life of around 4 hours. You can double the battery life by installing bbswitch to shut off the graphics card. You can try to use bumblebee, but I wasn't able to get this to work consistently. 
+A naked install of Debian with xfce desktop results in a battery life of around 4 hours. 
+You can double the battery life by installing bbswitch to shut off the graphics card. 
+You can try to use bumblebee, but I wasn't able to get this to work consistently. 
 
 To have bbswitch run automatically on boot, you need to create two files
+
 1. `/etc/modprobe.d/bbswitch.conf`
 2. `/etc/modules-load.d/bbswitch.conf`
+
 See the [source](https://github.com/Bumblebee-Project/bbswitch) for details. Do not create `/etc/modules`. 
 
 ### Problem with light-locker
 
-If you are presented with a black screen after screensaver, suspending, or hibernating, try TTY7 (Ctrl+Alt+F7) and then TTY8 (Ctrl+Alt+F8). This issue has been documented [before](https://github.com/the-cavalry/light-locker/issues/138). Some places suggest edting `/usr/bin/xflock4`.
+If you are presented with a black screen after screensaver, suspending, or hibernating, 
+try TTY7 (Ctrl+Alt+F7) and then TTY8 (Ctrl+Alt+F8). 
+This issue has been documented [before](https://github.com/the-cavalry/light-locker/issues/138). 
+Some places suggest editing `/usr/bin/xflock4`.
 
 ### Hibernate and Suspend
 
-Hibernate seems to work more reliably than suspend. Suspend will sometimes freeze system. This issue has also been documented [before](https://github.com/systemd/systemd/issues/11810#issuecomment-489727505)
+Hibernate seems to work more reliably than suspend. 
+Suspend will sometimes freeze system. 
+This issue has also been documented [before](https://github.com/systemd/systemd/issues/11810#issuecomment-489727505).
 
 # Backup
 
 As long as you don't reformat home, all preferences should be preserved. 
 backup.sh will backup key configuration files in the root file system which would be deleted upon reinstallation. 
 
-# Programs
-
-run software.sh as sudo
-
 # Unresolved Problems
 
-Have not tried to use graphics card
-Most Fn buttons not detected
+- Have not tried to use graphics card
+- Most Fn buttons not detected
