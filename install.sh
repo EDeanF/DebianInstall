@@ -6,4 +6,4 @@ apt-get upgrade
 dpkg --add-architecture i386
 apt-get install linux-headers-$(uname -r | sed 's,[^-]*-[^-]*-,,')
 apt-get install firmware-linux intel-microcode
-#apt-get install xfce4 xfce4-goodies
+apt-get install xfce4 
