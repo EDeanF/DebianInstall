@@ -1,9 +1,8 @@
 # TLDR
 
-1. install Debian 9 with standard system utilities only
+1. install Debian 11 with xfce4 desktop
 2. `sudo ./install.sh`
 3. `sudo ./configure.sh`
-4. `sudo ./nvidia.sh`
 
 # Resources to get started
 
@@ -16,7 +15,7 @@ The following resources are a great starting point for installing Debian for the
 # About Computer
 
 - **Laptop:** Gigabyte Aero 15 (2017)
-- **Distro:** Debian 9 Stretch
+- **Distro:** Debian 11 Bullseye
 - **Desktop:** xfce4
 
 # Installation
@@ -42,8 +41,8 @@ This makes it easy to reinstall Linux. You can easily figure out what is root an
 
 ### Installing base
 
-- Fresh install of Debian 10 does not work, will just install Debian 9 for now.
-- Installing xfce4 using the installation GUI sometimes breaks on Aero 15. I just install the base (standard system utilities only) and then install dekstop later
+- Currently, Debian 11 seems to work out of the box
+- In the past, installing xfce4 along with the operating system would break on Aero 15. You can try installing just the standard system utilities and then install deskstop later
 
 # Install
 
@@ -54,7 +53,7 @@ This makes it easy to reinstall Linux. You can easily figure out what is root an
 - adds 32-bit architecture
 - install linux headers
 - install firmware drivers and intel microcode firmware
-- install xfce4 desktop
+- install xfce4 desktop, if not already installed
 
 # Configure
 
@@ -70,24 +69,21 @@ Configures xfce, network manager, firewall, grub2, and mousepad.
 
 # Discrete Graphics and Power Management
 
-`sudo ./nvidia.sh`
+nouveau drivers appear to work well, for the time being. Battery life is approximately 10 hours. I tried to use bbswitch to turn off the graphics card, but this no longer appears stable. You can turn the graphics card off, but when you try to turn it on again, the kernel throws an error: `can't change power state form D3cold to D0 (config space inaccessible)`. 
 
-### Disabling Nouveau Drivers
-
-There are problems running nouveau drivers. For example, running lspci causes crash.
+Installing nvidia drivers no longer completely breaks the installation. The nvidia driver did not always load after restarting. Maybe worth revisiting.
 
 ### Disabling Nvidea Card
 
-A naked install of Debian with xfce desktop results in a battery life of around 4 hours. 
-You can double the battery life by installing bbswitch to shut off the graphics card. 
-You can try to use bumblebee, but I wasn't able to get this to work consistently. 
+If neither the nouveau drivers nor the nvidia drivers work, the best way to improve your battery life is to turn off the graphics card. This is done by installing bbswitch or bumblebee. I wasn't able to get bumblebee to work consistently, so I prefer to just use bbswitch and configure it by hand.
 
-To have bbswitch run automatically on boot, you need to create two files
+To have bbswitch run automatically on boot, you need to create three files
 
-1. `/etc/modprobe.d/bbswitch.conf`
-2. `/etc/modules-load.d/bbswitch.conf`
+1. `/etc/modprobe.d/nouveau_blacklist.conf`
+2. `/etc/modprobe.d/bbswitch.conf`
+3. `/etc/modules-load.d/bbswitch.conf`
 
-See the [source](https://github.com/Bumblebee-Project/bbswitch) for details. Do not create `/etc/modules`. 
+See the [source code](https://github.com/Bumblebee-Project/bbswitch) for details. Do not create `/etc/modules`. 
 
 ### Problem with light-locker
 

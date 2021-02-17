@@ -1,15 +1,12 @@
 #!/bin/bash
+
 # configure xfce4
-apt-get install xfce4-battery-plugin xfce4-terminal xfce4-power-manager xfce4-whiskermenu-plugin mousepad 
+# apt-get install xfce4-battery-plugin xfce4-terminal xfce4-power-manager xfce4-whiskermenu-plugin mousepad 
 
 # configure internet
-apt-get install network-manager network-manager-gnome firmware-iwlwifi firefox-esr
+# apt-get install network-manager network-manager-gnome firefox-esr
 
-#cp ./config/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
-#/etc/init.d/network-manager restart
-
-# if apt-get is slow, try forcing it to use IPv4
-# cp ./config/99force-ipv4 /etc/apt/apt.conf.d/99force-ipv4
+apt-get install firmware-iwlwifi 
 
 # setup firewall
 apt-get install ufw
