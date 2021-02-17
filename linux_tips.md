@@ -1,7 +1,8 @@
 # Partitioning and Backup
 
--fdisk
--rsync
+-`fdisk`
+
+-`rsync`
 
 
 # Building from Source
@@ -66,22 +67,47 @@ If the dependencies are commonly found in most Linux systems, the authors may wr
 The filesystems associated with hardware are called virtual file systems because there are no actual files. They are linked to kernel data structures.
 
 -`dev`: device files
+
 -`/proc`: process and kernel information files
+
 -`/sys`: the more modern version of /proc. Control of hardware is sometimes achieved by editing files here.
 
-## Commands
+## Command-line Interfaces
+
+[Recommended reading](https://en.wikipedia.org/wiki/List_of_Unix_commands). Ordering by category groups commands in a useful fashion.
+
+### print information
 
 -`uname -a`: print all system information
 
--`top`, `htop`, `atop`: view processes
-
 -`lshw`: lists hardware
+
 -`lspci -v`: lists pci devices
+
 -`lscpu`: lists cpu information
+
 -`lsblk`: lists block devices such as hard disks, flash drives, etc
+
 -`lsusb`: lists usb 
+
 -`lsscsi`: list scsi/sata devices
 
+-`dmidecode`: DMI table decoder; contains information about BIOS and system hardware
+
+### monitor processes
+
+-`ps`: list the current active processes
+
+-`kill`: send message to process, often to terminate
+
+-`top`, `htop`, `atop`: monitor active processes
+
+- `modprobe`, `lsmod`, `rmmod`: start, list, and remove loadable kernel modules.
+
+
+### debuging
+
 -`/var/log/kernel.log`: kernel logs
--`dmesg | tail -10`: command line tool to spit out kernel logs
--`dmidecode`: DMI table decoder
+
+-`dmesg | tail -10`: command line tool to spit out kernel logs; stands for diagnostic message
+
