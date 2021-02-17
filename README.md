@@ -42,7 +42,7 @@ This makes it easy to reinstall Linux. You can easily figure out what is root an
 ### Installing base
 
 - Currently, Debian 11 seems to work out of the box
-- In the past, installing xfce4 along with the operating system would break on Aero 15. You can try installing just the standard system utilities and then install deskstop later
+- In the past, installing xfce4 along with the operating system would break on Aero 15. You can try installing just the standard system utilities and then install desktop later
 
 # Install
 
@@ -69,9 +69,11 @@ Configures xfce, network manager, firewall, grub2, and mousepad.
 
 # Discrete Graphics and Power Management
 
-nouveau drivers appear to work well, for the time being. Battery life is approximately 10 hours. I tried to use bbswitch to turn off the graphics card, but this no longer appears stable. You can turn the graphics card off, but when you try to turn it on again, the kernel throws an error: `can't change power state form D3cold to D0 (config space inaccessible)`. 
+nouveau drivers appear to work well, for the time being. Battery life is approximately 10 hours, and suspending appears to work. 
 
-Installing nvidia drivers no longer completely breaks the installation. The nvidia driver did not always load after restarting. Maybe worth revisiting.
+I tried to use bbswitch to turn off the graphics card, but this no longer appears stable. You can turn the graphics card off with bbswitch, but when you try to turn it on again, the kernel throws an error: `can't change power state from D3cold to D0 (config space inaccessible)`. 
+
+Installing nvidia drivers no longer completely breaks the installation. The nvidia driver did not always load after restarting. May be worth revisiting.
 
 ### Disabling Nvidea Card
 
@@ -94,7 +96,7 @@ Some places suggest editing `/usr/bin/xflock4`.
 
 ### Hibernate and Suspend
 
-Hibernate seems to work more reliably than suspend. 
+In the past, hibernate seems to work more reliably than suspend. 
 Suspend will sometimes freeze system. 
 This issue has also been documented [before](https://github.com/systemd/systemd/issues/11810#issuecomment-489727505).
 

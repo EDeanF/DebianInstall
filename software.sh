@@ -11,10 +11,10 @@ apt-get install qtbase5-dev # qt5-default
 # python
 #apt-get install python3
 #apt-get build-dep python3
-apt-get build-dep python3.9
-apt-get build-dep python3-scipy python3-numpy python3-pandas python3-sklearn 
+#apt-get build-dep python3.9
+#apt-get build-dep python3-scipy python3-numpy python3-pandas python3-sklearn 
 apt-get install python3-dev python3-pip python3-venv 
-#apt-get install python3-scipy python3-numpy python3-pandas python3-sklearn 
+apt-get install python3-scipy python3-numpy python3-pandas python3-sklearn 
 
 # media
 apt-get install libreoffice vlc inkscape xpdf 
